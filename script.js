@@ -2901,36 +2901,52 @@ createAndAddMonster({
 });
 // createAndAddMonster({keyName: "", nazwa : "", HP : "", morale : "-", pancerz : "brak", broń : "", specjalneCechy : ""});
 
-let MBUncleanScroll = {
-  type: "picker",
-  list: [
-    "Dłonie Otwierają Południową Bramę (przeklęty zwój) - kula ognia trafia k2 istoty zadając każdej z nich k8 obrażeń",
-    "Język Eris (przeklęty zwój) - wybrana przez ciebie istota jest zdezorientowana przez 10 minut",
-    "Te-le-kin-eza (przeklęty zwój) - przesuwasz przedmioty do k4x4 metry przez k6 minut",
-    "Lucy-ferna Lewitacja (przeklęty zwój) - unosisz się przez Skupienie +k10 rund",
-    "Demon Żył (przeklęty zwój) - jedna istota dusi się przez k6 rund, tracąc k4 HP na rundę",
-    "Dziewięć Purpurowych Znaków Rozplątuje Burzę (przeklęty zwój) - tworzysz k2 pioruny po k6 obrażeń każdy",
-    "Metzhuotl Oślepia Twoje Oko (przeklęty zwój) - istota staje się niewidzialna przez k6 rund lub dopóki otrzyma obrażenia, atakuje i broni się z PT6",
-    "Odrażający Psychopomp (przeklęty zwój) - przywołujesz (k6): 1-3 k4 szkielety, 4-6 k4 zombie",
-    "Powieka Oślepia Wiatr (przeklęty zwój) - k4 istoty zasypiają na godzinę, chyba że przejdą test PT14",
-    "Śmierć (przeklęty zwój) - wszystkie istoty w obrębie 10 metrów tracą w sumie 4k10 HP",
-  ],
+const MBUncleanScroll = function() {
+  let list = []
+  let itemType = [
+    "Przedmiot Mocy: "
+  ]
+  let MBUncleanScrolls = [
+    "Kula ognia trafia k2 istoty zadając każdej z nich k8 obrażeń",
+    "Wybrana przez ciebie istota jest zdezorientowana przez 10 minut",
+    "Przesuwasz przedmioty do k4x4 metry przez k6 minut",
+    "Unosisz się przez Skupienie +k10 rund",
+    "Jedna istota dusi się przez k6 rund, tracąc k4 HP na rundę",
+    "Tworzysz k2 pioruny po k6 obrażeń każdy",
+    "Istota staje się niewidzialna przez k6 rund lub dopóki otrzyma obrażenia, atakuje i broni się z PT6",
+    "Przywołujesz (k6): 1-3 k4 szkielety, 4-6 k4 zombie",
+    "k4 istoty zasypiają na godzinę, chyba że przejdą test PT14",
+    "Wszystkie istoty w obrębie 10 metrów tracą w sumie 4k10 HP",
+  ]
+  list.push(randomizeFromArray(itemType) + randomizeFromArray(MBUncleanScrolls) + " - ładunki: " + k(6, true))
+  return {
+    type: "pickerRoller",
+    list
+  }
 };
 
-let MBSacredScroll = {
-  type: "picker",
-  list: [
-    "Łaska Martwego Świętego (święty zwój) - k2 istoty regenerują k10 HP każda",
-    "Łaska Dla Grzesznika (święty zwój) - wybrana istota dostaje +k6 do wybranego rzutu",
-    "Szepty Przekraczają Wrota (święty zwój) - zadaj trzy pytania martwej istocie",
-    "Egida Rozpaczy (święty zwój) - wybrana istota otrzymuje 2k6 dodatkowych HP na 10 rund",
-    "Oszukane Przeznaczenie (święty zwój) - jedna istota, martwa krócej niż tydzień, zostaje ożywiona z przerażającymi wspomnieniami",
-    "Bestialska Mowa (święty zwój) - możesz rozmawiać ze zwierzętami przez k20 minut",
-    "Fałszywy Świt/Rydwan Nocy (święty zwój) - światło lub całkowita ciemność przez 3k10 minut",
-    "Hermetyczny Krok (święty zwój) - odnajdujesz wszystkie pułapki na swojej drodze przez 2k10 minut",
-    "Pochłaniające Spojrzenie (święty zwój) - k4 istoty tracą po k8 HP każda",
-    "Enochiańska Składnia (święty zwój) - jedna istota ślepo podąża za pojedynczym rozkazem",
-  ],
+let MBSacredScroll = function() {
+  let list = []
+  let itemType = [
+    "Przedmiot Mocy: "
+  ]
+  let MBSacredScrolls = [
+    "k2 istoty regenerują k10 HP każda",
+    "wybrana istota dostaje +k6 do wybranego rzutu",
+    "zadaj trzy pytania martwej istocie",
+    "wybrana istota otrzymuje 2k6 dodatkowych HP na 10 rund",
+    "jedna istota, martwa krócej niż tydzień, zostaje ożywiona z przerażającymi wspomnieniami",
+    "możesz rozmawiać ze zwierzętami przez k20 minut",
+    "światło lub całkowita ciemność przez 3k10 minut",
+    "odnajdujesz wszystkie pułapki na swojej drodze przez 2k10 minut",
+    "k4 istoty tracą po k8 HP każda",
+    "jedna istota ślepo podąża za pojedynczym rozkazem",
+  ]
+  list.push(randomizeFromArray(itemType) +  randomizeFromArray(MBSacredScrolls) + " - ładunki: " + k(6, true) + " ład.")
+  return {
+    type: "pickerRoller",
+    list
+  }
 };
 
 const MBTabletOfOchreObscurity = {
@@ -4154,7 +4170,7 @@ function displayArray(ar, parent) {
               width: 190,
               absolutePosition: { x: 415, y: 675 }
              },
-             { text: ar[j].createdCharacterName, fontSize: 20, bold: true},
+             { text: "Imię:___________", fontSize: 20, bold: true},
              { text: ar[j].createdCharacterClass, margin: [0, 5, 0, 10], bold: true},
              //{ text: ar[j].createdCharacterClassDescription, margin: [0, 5, 0, 10]},
              { text: ar[j].createdCharacterPersonality, margin: [0, 5, 0, 10]},
@@ -4177,8 +4193,8 @@ function displayArray(ar, parent) {
              { text: ar[j].createdCharacterSilver + " szt. srebra", margin: [0, 10, 0, 10]},
              { text: ar[j].createdCharacterOmens, bold: true},
              { text: "Maksymalne obrażenia, redukcja obrażeń o k6, powtórzenie rzutu, obniżenie poziomu trudności testu o 4", fontSize: 8},
-             { text: "Używanie zwojów", margin: [0, 5, 0, 0],bold: true},
-             { text: "Skupienie +k4 razy na dzień. Test Skupienie ST12, lub -k2 HP oraz brak Mocy przez 1 godz.", fontSize: 8},
+             { text: "Używanie Przedmiotów Mocy", margin: [0, 5, 0, 0],bold: true},
+             { text: "Test Skupienie ST12, porażka oznacza -k2 HP oraz redukcję ładunków Przedmiotu.", fontSize: 8},
          ]
         };
 
@@ -4457,18 +4473,32 @@ function createCurrentEnemy() {
     "topór (k6)",
     `łuk (k6, ${k(10)} strzał)`,
     "kiścień (k8)",
+    "zweihänder (k10)"
     //"bomba (k10)"
   ];
 
   let armorTiers = [
-    //"",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
     "futrzana zbroja, -k2 obrażeń",
-    // "skórzana zbroja, -k2 obrażeń",
-    // "kolczuga, -k4 obrażeń, PT+2 do testów zręczności, w tym obrony",
-    // "skórzana zbroja, -k2 obrażeń, tarcza -1 obrażenie",
-    // "kolczuga, -k4 obrażeń, PT+2 do testów zręczności, w tym obrony, tarcza -1 obrażenie",
-    // "zbroja płytowa, -k6 obrażeń, PT+4 do testów zręczności, PT+2 obrony, tarcza -1 obrażenie",
-    // "zbroja płytowa, -k6 obrażeń, PT+4 do testów zręczności, PT+2 obrony",
+    "skórzana zbroja, -k2 obrażeń",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "futrzana zbroja, -k2 obrażeń",
+    "skórzana zbroja, -k2 obrażeń",
+    "kolczuga, -k4 obrażeń, PT+2 do testów zręczności, w tym obrony",
+    "skórzana zbroja, -k2 obrażeń, tarcza -1 obrażenie",
+    "kolczuga, -k4 obrażeń, PT+2 do testów zręczności, w tym obrony, tarcza -1 obrażenie",
+    "zbroja płytowa, -k6 obrażeń, PT+4 do testów zręczności, PT+2 obrony, tarcza -1 obrażenie",
+    "zbroja płytowa, -k6 obrażeń, PT+4 do testów zręczności, PT+2 obrony",
   ];
 
   let itemsRoll = k(2)
